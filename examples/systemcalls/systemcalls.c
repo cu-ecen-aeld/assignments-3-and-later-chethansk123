@@ -1,5 +1,10 @@
-#include "systemcalls.h"
 
+#include "systemcalls.h"
+#include<stdlib.h>
+#include<sys/wait.h>
+#include<unistd.h>
+#include<sys/types.h>
+#include<fcntl.h>
 /**
  * @param cmd the command to execute with system()
  * @return true if the command in @param cmd was executed
@@ -16,6 +21,16 @@ bool do_system(const char *cmd)
  *   and return a boolean true if the system() call completed with success
  *   or false() if it returned a failure
 */
+	bool ret;
+
+	ret = system(cmd);
+		if(ret == 0)
+		{
+			return true;
+		}
+		else{
+			return false;
+		}
 
     return true;
 }
@@ -59,6 +74,30 @@ bool do_exec(int count, ...)
  *
 */
 
+    pid_t pid;
+    int wait_status;
+    pid = fork();
+
+    if(pid == -1)
+    {
+    	return false;
+    }
+
+    else if(pid == 0)
+    {
+     execv(command[0], command);
+     exit(1);
+    }
+
+    wait(&wait_status);
+    if(wait_status == 0)
+    {
+    return true;
+    }
+    else {
+    return false;
+    }
+
     va_end(args);
 
     return true;
@@ -92,6 +131,40 @@ bool do_exec_redirect(const char *outputfile, int count, ...)
  *   The rest of the behaviour is same as do_exec()
  *
 */
+   pid_t pid;
+   int redirect;
+   int wait_status;
+   int fileredirect;
+   pid = fork();
+   if(pid == -1)
+   {
+   	return false;
+   }
+   else if(pid == 0)
+   {
+   	fileredirect = open(outputfile, O_WRONLY|O_CREAT|O_TRUNC, 0644);
+        if(fileredirect == -1)
+	{
+		return false;
+	}
+	redirect = dup2(fileredirect, 1);
+	if (redirect < 0)
+	{
+		return false;
+	}
+
+     execv(command[0], command);
+     exit(1);
+   
+   }
+    wait(&wait_status);
+    if(wait_status == 0)
+    {
+    return true;
+    }
+    else {
+    return false;
+    }
 
     va_end(args);
 
