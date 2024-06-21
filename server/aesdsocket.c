@@ -14,13 +14,15 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <getopt.h>
+#include <stdbool.h>
 
 #define PORT 9000
 #define FILE_PATH "/var/tmp/aesdsocketdata"
 #define BUFFER_SIZE 1024
 int server_socket = -1;
 int status = -1;
-
+bool daemon_mode = false;
 
 void handle_signal(int signal) {
     if (signal == SIGINT || signal == SIGTERM) {
@@ -54,7 +56,66 @@ void setup_signal_handler() {
 }
 
 
-int main()
+void daemonize() {
+    pid_t pid, sid;
+
+    // Fork off the parent process
+    pid = fork();
+    if (pid < 0) {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+    // If we got a good PID, then we can exit the parent process.
+    if (pid > 0) {
+        exit(EXIT_SUCCESS);
+    }
+
+    // Change the file mode mask
+    umask(0);
+
+    // Create a new SID for the child process
+    sid = setsid();
+    if (sid < 0) {
+        perror("setsid");
+        exit(EXIT_FAILURE);
+    }
+
+    // Change the current working directory
+    if ((chdir("/")) < 0) {
+        perror("chdir");
+        exit(EXIT_FAILURE);
+    }
+
+    // Close out the standard file descriptors
+    close(STDIN_FILENO);
+    close(STDOUT_FILENO);
+    close(STDERR_FILENO);
+
+    // Redirect stdin, stdout, stderr to /dev/null
+    open("/dev/null", O_RDONLY);
+    open("/dev/null", O_RDWR);
+    open("/dev/null", O_RDWR);
+}
+
+void parse_arguments(int argc, char *argv[]) {
+    int opt;
+
+    while ((opt = getopt(argc, argv, "d")) != -1) {
+        switch (opt) {
+            case 'd':
+                daemon_mode = true;
+                break;
+            default: /* '?' */
+                fprintf(stderr, "Usage: %s [-d]\n", argv[0]);
+                exit(EXIT_FAILURE);
+        }
+    }
+}
+
+
+
+
+int main( int argc, char *argv[])
 {
 struct sockaddr_in server_addr, client_addr;
 socklen_t client_addr_len = sizeof(client_addr);
@@ -62,6 +123,14 @@ int client_socket;
 char buffer[BUFFER_SIZE];
 ssize_t bytes_received;
 openlog("aesdsocket", LOG_PID, LOG_USER);
+
+ parse_arguments(argc, argv);
+
+    if (daemon_mode) {
+        daemonize();
+    }
+
+
 
 setup_signal_handler();
 
