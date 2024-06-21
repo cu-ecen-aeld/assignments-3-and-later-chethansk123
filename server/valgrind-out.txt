@@ -1,0 +1,121 @@
+==8494== Memcheck, a memory error detector
+==8494== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==8494== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==8494== Command: ./aesdsocket
+==8494== Parent PID: 8492
+==8494== 
+--8494-- 
+--8494-- Valgrind options:
+--8494--    --error-exitcode=1
+--8494--    --leak-check=full
+--8494--    --show-leak-kinds=all
+--8494--    --track-origins=yes
+--8494--    --errors-for-leak-kinds=definite
+--8494--    --verbose
+--8494--    --log-file=valgrind-out.txt
+--8494-- Contents of /proc/version:
+--8494--   Linux version 5.4.0-150-generic (buildd@bos03-amd64-012) (gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04)) #167~18.04.1-Ubuntu SMP Wed May 24 00:51:42 UTC 2023
+--8494-- 
+--8494-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3
+--8494-- Page sizes: currently 4096, max supported 4096
+--8494-- Valgrind library directory: /usr/lib/valgrind
+--8494-- Reading syms from /home/chethan/Documents/Linux_course/assignment5/assignments-3-and-later-chethansk123/server/aesdsocket
+--8494-- Reading syms from /lib/x86_64-linux-gnu/ld-2.27.so
+--8494--   Considering /lib/x86_64-linux-gnu/ld-2.27.so ..
+--8494--   .. CRC mismatch (computed 2977d8b2 wanted c64f09ed)
+--8494--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.27.so ..
+--8494--   .. CRC is valid
+--8494-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--8494--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--8494--   .. CRC mismatch (computed 41ddb025 wanted 9972f546)
+--8494--    object doesn't have a symbol table
+--8494--    object doesn't have a dynamic symbol table
+--8494-- Scheduler: using generic scheduler lock implementation.
+--8494-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==8494== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-8494-by-root-on-???
+==8494== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-8494-by-root-on-???
+==8494== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-8494-by-root-on-???
+==8494== 
+==8494== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==8494== don't want to do, unless you know exactly what you're doing,
+==8494== or are doing some strange experiment):
+==8494==   /usr/lib/valgrind/../../bin/vgdb --pid=8494 ...command...
+==8494== 
+==8494== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==8494==   /path/to/gdb ./aesdsocket
+==8494== and then give GDB the following command
+==8494==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=8494
+==8494== --pid is optional if only one valgrind process is running
+==8494== 
+--8494-- REDIR: 0x4020d20 (ld-linux-x86-64.so.2:strlen) redirected to 0x580608c1 (???)
+--8494-- REDIR: 0x4020b00 (ld-linux-x86-64.so.2:index) redirected to 0x580608db (???)
+--8494-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--8494--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--8494--   .. CRC mismatch (computed 50df1b30 wanted 4800a4cf)
+--8494--    object doesn't have a symbol table
+--8494-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--8494--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--8494--   .. CRC mismatch (computed f893b962 wanted 95ee359e)
+--8494--    object doesn't have a symbol table
+==8494== WARNING: new redirection conflicts with existing -- ignoring it
+--8494--     old: 0x04020d20 (strlen              ) R-> (0000.0) 0x580608c1 ???
+--8494--     new: 0x04020d20 (strlen              ) R-> (2007.0) 0x04c34db0 strlen
+--8494-- REDIR: 0x401d540 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c35ee0 (strcmp)
+--8494-- REDIR: 0x4021260 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c394f0 (mempcpy)
+--8494-- Reading syms from /lib/x86_64-linux-gnu/libc-2.27.so
+--8494--   Considering /lib/x86_64-linux-gnu/libc-2.27.so ..
+--8494--   .. CRC mismatch (computed f250d419 wanted 4aacab51)
+--8494--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.27.so ..
+--8494--   .. CRC is valid
+--8494-- REDIR: 0x4edca50 (libc.so.6:memmove) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edbd60 (libc.so.6:strncpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edcd30 (libc.so.6:strcasecmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edb7b0 (libc.so.6:strcat) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edbd90 (libc.so.6:rindex) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4ede480 (libc.so.6:rawmemchr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edcbc0 (libc.so.6:mempcpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edc9f0 (libc.so.6:bcmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edbd20 (libc.so.6:strncmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edb820 (libc.so.6:strcmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edcb20 (libc.so.6:memset) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4ef9db0 (libc.so.6:wcschr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edbcc0 (libc.so.6:strnlen) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edb890 (libc.so.6:strcspn) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edcd80 (libc.so.6:strncasecmp) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edb860 (libc.so.6:strcpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edcec0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edbdc0 (libc.so.6:strpbrk) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edb7e0 (libc.so.6:index) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edbc90 (libc.so.6:strlen) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4ee6380 (libc.so.6:memrchr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edcdd0 (libc.so.6:strcasecmp_l) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edc9c0 (libc.so.6:memchr) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4efab70 (libc.so.6:wcslen) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edc070 (libc.so.6:strspn) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edcd00 (libc.so.6:stpncpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edccd0 (libc.so.6:stpcpy) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4ede4b0 (libc.so.6:strchrnul) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4edce20 (libc.so.6:strncasecmp_l) redirected to 0x4a2c6e0 (_vgnU_ifunc_wrapper)
+--8494-- REDIR: 0x4eeeff0 (libc.so.6:__strrchr_sse2) redirected to 0x4c34790 (__strrchr_sse2)
+--8494-- REDIR: 0x4ef9530 (libc.so.6:__memset_sse2_unaligned) redirected to 0x4c385d0 (memset)
+--8494-- REDIR: 0x4eeede0 (libc.so.6:__strchrnul_sse2) redirected to 0x4c39020 (strchrnul)
+--8494-- REDIR: 0x4ed5020 (libc.so.6:malloc) redirected to 0x4c31aa0 (malloc)
+--8494-- REDIR: 0x4ed8050 (libc.so.6:calloc) redirected to 0x4c33a70 (calloc)
+--8494-- REDIR: 0x4eef2e0 (libc.so.6:__strlen_sse2) redirected to 0x4c34d30 (__strlen_sse2)
+--8494-- REDIR: 0x4ed5910 (libc.so.6:free) redirected to 0x4c32cd0 (free)
+--8494-- REDIR: 0x4ef9120 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4c36060 (memcpy@GLIBC_2.2.5)
+--8494-- REDIR: 0x4edc5a0 (libc.so.6:__GI_strstr) redirected to 0x4c39760 (__strstr_sse2)
+--8494-- REDIR: 0x4fcde80 (libc.so.6:__memcmp_sse4_1) redirected to 0x4c37d50 (__memcmp_sse4_1)
+--8494-- REDIR: 0x4ee7b30 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x4c35da0 (strcmp)
+--8494-- REDIR: 0x4ef9100 (libc.so.6:__mempcpy_sse2_unaligned) redirected to 0x4c39130 (mempcpy)
+--8494-- REDIR: 0x4ed6c50 (libc.so.6:realloc) redirected to 0x4c33cb0 (realloc)
+--8494-- REDIR: 0x4eeebc0 (libc.so.6:__strchr_sse2) redirected to 0x4c348d0 (__strchr_sse2)
+==8494== 
+==8494== HEAP SUMMARY:
+==8494==     in use at exit: 0 bytes in 0 blocks
+==8494==   total heap usage: 41 allocs, 41 frees, 103,577 bytes allocated
+==8494== 
+==8494== All heap blocks were freed -- no leaks are possible
+==8494== 
+==8494== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==8494== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
